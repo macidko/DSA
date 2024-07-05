@@ -2,7 +2,7 @@
 # Data Structures and Algorithms
 - [Bit](#bit)
 - [Byte](#byte)
-- [İkilik sayıyı(binary) ondalık sayıya(decimal) çevirme](#ikilik-sayıyıbinary-ondalık-sayıyadecimal-çevirme)
+- [İkilik sayıyı(binary) ondalık sayıya(decimal) çevirme](#ondalık-sayıyıdecimal-ikilik-sayıyabinary-çevirme)
 - [Ondalık sayıyı(decimal) ikilik sayıya(binary) çevirme](#ondalık-sayıyıdecimal-ikilik-sayıyabinary-çevirme)
 - [Struct](#struct)
 - [Class ve Struct Farkı](#class-ve-struct-farkı)
