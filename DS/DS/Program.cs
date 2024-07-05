@@ -13,7 +13,8 @@ internal class Program
         // StackBasics();
         //StackExample();
         //QueueBasics();
-        QueueExample();
+        //QueueExample();
+        LinkedListExample();
 
     }
 
@@ -327,6 +328,42 @@ internal class Program
         else
         {
             Console.WriteLine("\nYanlış bir tuşa bastınız. Program sonlandırıldı.");
+        }
+    }
+    private static void LinkedListExample()
+    {
+        LinkedList<string> cities = new();
+        cities.AddFirst("Ordu");
+        cities.AddFirst("Trabzon");
+        cities.AddLast("İstanbul");
+
+        cities.AddAfter(cities.Find("Ordu"), "Samsun");
+        cities.AddBefore(cities.First.Next.Next, "Giresun");
+        cities.AddAfter(cities.Last.Previous, "Sinop");
+        cities.AddAfter(cities.Find("Sinop"), "Zonguldak");
+
+        //foreach (var c in cities)
+        //{
+        //    Console.WriteLine(c);
+        //}
+
+        Console.WriteLine("Gidiş Güzergahı\n");
+
+        //var departureRoad = cities.First;
+        LinkedListNode<string> departureRoad = cities.First;
+        while (departureRoad != null)
+        {
+            Console.WriteLine(departureRoad.Value);
+            departureRoad = departureRoad.Next;
+        }
+        Wrapper();
+        Console.WriteLine("Dönüş Güzergahı\n");
+        //var returnRoad = cities.First;
+        LinkedListNode<string> returnRoad = cities.Last;
+        while (returnRoad != null)
+        {
+            Console.WriteLine(returnRoad.Value);
+            returnRoad = returnRoad.Previous;
         }
     }
 }
