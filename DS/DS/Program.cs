@@ -11,7 +11,9 @@ internal class Program
         // SortedListExample();
         // IComparableImplementation();
         // StackBasics();
-        StackExample();
+        //StackExample();
+        //QueueBasics();
+        QueueExample();
 
     }
 
@@ -262,5 +264,69 @@ internal class Program
             x--;
         }
         Console.WriteLine($"\t {"Result",20}: {result}");
+    }
+    private static void QueueBasics()
+    {
+        Queue<char> queue = new Queue<char>();
+        queue.Enqueue('a');
+        queue.Enqueue('b');
+
+
+        char[] chars = queue.ToArray();
+        Console.WriteLine($"Array Uzunluğu: {chars.Length}");
+
+        Console.WriteLine($"Eleman Sayısı: {queue.Count}");
+        Console.WriteLine($"Kuyruğun başındaki eleman: {queue.Peek()}");
+        Console.WriteLine($"Kuyruktan çıkarılan eleman: {queue.Dequeue()}");
+
+    }
+    private static void QueueExample()
+    {
+        List<char> chars = new()
+    {
+        'a', 'e', 'ı', 'i', 'o', 'ö', 'u', 'ü'
+    };
+
+        Queue<char> charQueue = new Queue<char>();
+
+        ConsoleKeyInfo selected;
+        foreach (var c in chars)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"{c} kuyruğa eklensin mi? [e/h]");
+
+            selected = Console.ReadKey(true);
+            Console.WriteLine(); // Tuşu konsola yazdırmayı engellemek için
+
+            if (selected.Key == ConsoleKey.E && selected.Key != ConsoleKey.H)
+            {
+                charQueue.Enqueue(c);
+                Console.WriteLine($"{c} kuyruğa eklendi");
+                Console.WriteLine($"Kuyruktaki eleman sayısı: {charQueue.Count}");
+            }
+            else
+            {
+                Console.WriteLine("Yanlış bir tuşa bastınız.");
+            }
+        }
+
+        Console.WriteLine("Elemanları kuyruktan çıkartmak için ESC tuşuna basınız.");
+        selected = Console.ReadKey(true);
+
+        if (selected.Key == ConsoleKey.Escape)
+        {
+
+            while (charQueue.Count > 0)
+            {
+                Console.WriteLine();
+                Console.WriteLine($"{charQueue.Peek()} kuyruktan çıkartılıyor.");
+                Console.WriteLine($"{charQueue.Dequeue()} çıkartıldı.");
+                Console.WriteLine($"Kuyruktaki eleman sayısı: {charQueue.Count}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("\nYanlış bir tuşa bastınız. Program sonlandırıldı.");
+        }
     }
 }
