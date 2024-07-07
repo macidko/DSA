@@ -1,22 +1,34 @@
 ﻿using DS;
 using System.Collections; // Collections kütüphanesini dahil eder.
-using System.Collections.Generic; // Generic Collections kütüphanesini dahil eder.
+using System.Collections.Generic;
+using System.Linq; // Generic Collections kütüphanesini dahil eder.
 
 internal class Program
 {
     private static void Main(string[] args)
     {
+
+        // Data Structures
+
         // HastableBasics();
         // HashtableExample();
         // SortedListExample();
         // IComparableImplementation();
         // StackBasics();
-        //StackExample();
-        //QueueBasics();
-        //QueueExample();
-        LinkedListExample();
+        // StackExample();
+        // QueueBasics();
+        // QueueExample();
+        // LinkedListExample();
+        DictionaryBasics();
+
+
+        // Algorithms
+        // CalculateCharacterFrequency();
+
 
     }
+
+  
 
     // Bir ayırıcı yazdıran metod.
     private static void Wrapper()
@@ -364,6 +376,81 @@ internal class Program
         {
             Console.WriteLine(returnRoad.Value);
             returnRoad = returnRoad.Previous;
+        }
+    }
+    private static void DictionaryBasics()
+    {
+        Dictionary<int, string> phones = new()
+        {
+            {332, "Konya"},
+            {424, "Elazığ"}
+        };
+
+        //ekleme
+        phones.Add(466, "Artvin");
+        phones.Add(322, "Adana");
+        phones.Add(212, "İstanbul");
+
+        //erişme
+        Console.WriteLine($"212 kodlu şehir: {phones[212]}");
+
+        //ContainsKey
+        if (!phones.ContainsKey(312))
+        {
+            Console.WriteLine("\aAnkaranın Kod Bilgisi Tanımlı Değil.");
+            phones.Add(312, "Ankara");
+            Console.WriteLine($"{phones[312]} Eklendi.");
+
+            Wrapper();
+        }
+
+        // ContainsValue
+        if (!phones.ContainsValue("Malatya"))
+        {
+            Console.WriteLine("\aMalatyanın Kod Bilgisi Tanımlı Değil!");
+            phones.Add(342, "Malatya");
+            Console.WriteLine($"{phones[342]} Eklendi.");
+
+            Wrapper();
+        }
+
+        // IOrderedEnumerable<KeyValuePair<int, string>> sortedDictionary = phones.OrderBy(p => p.Key);
+        // dictionary<tkey, tvalue> ifadesinin orderby ile sıralanması IOrderedEnumerable<KeyValuePair<int, string>> veri tipini döndürür.
+        var sortedDictionary = phones.OrderBy(p => p.Key);
+
+        //dictonary<TKey, TValue> ifadesi KeyValuePair<tkey,tvalue> tipini döndürür
+        foreach (KeyValuePair<int, string> phone in phones)
+        {
+            Console.WriteLine(phone);
+        }
+    }
+
+
+
+
+    // CalculateCharacterFrequency
+    private static void CalculateCharacterFrequency()
+    {
+        string text = "asfqWFqwfAsfQWFqwgqwGqwgASdQWgqWGasGqwGqwFqwG";
+
+        Dictionary<char, int> characters = new();
+
+        for (int i = 0; i < text.Length; i++)
+        {
+            if (!characters.ContainsKey(text[i]))
+            {
+                characters.Add(text[i], 1);
+            }
+            else
+            {
+                characters[text[i]]++;
+            }
+        }
+
+
+        foreach (var character in characters)
+        {
+            Console.WriteLine(character);
         }
     }
 }
