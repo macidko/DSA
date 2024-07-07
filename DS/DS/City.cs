@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DS
+internal partial class Program
 {
     public class City : IComparable<City>
     {

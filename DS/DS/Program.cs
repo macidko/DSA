@@ -1,9 +1,8 @@
-﻿using DS;
-using System.Collections; // Collections kütüphanesini dahil eder.
+﻿using System.Collections; // Collections kütüphanesini dahil eder.
 using System.Collections.Generic;
 using System.Linq; // Generic Collections kütüphanesini dahil eder.
 
-internal class Program
+internal partial class Program
 {
     private static void Main(string[] args)
     {
@@ -19,16 +18,13 @@ internal class Program
         // QueueBasics();
         // QueueExample();
         // LinkedListExample();
-        DictionaryBasics();
+        // DictionaryBasics();
+        DictionaryExample();
 
 
         // Algorithms
-        // CalculateCharacterFrequency();
-
-
+        //CalculateCharacterFrequency();
     }
-
-  
 
     // Bir ayırıcı yazdıran metod.
     private static void Wrapper()
@@ -424,7 +420,21 @@ internal class Program
             Console.WriteLine(phone);
         }
     }
+    private static void DictionaryExample()
+    {
+        Dictionary<int, Personel> personelList = new()
+        {
+            {2, new Personel(110, "Tame", "Impala", 6000)},
+            {3, new Personel(120, "Mac", "DeMarco", 7000)},
+        };
 
+        personelList.Add(1, new Personel(100, "Arctic", "Monkeys", 5000));
+
+        foreach (var p in personelList)
+        {
+            Console.WriteLine(p);
+        }
+    }
 
 
 
