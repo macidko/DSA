@@ -19,11 +19,15 @@ internal partial class Program
         // QueueExample();
         // LinkedListExample();
         // DictionaryBasics();
-        DictionaryExample();
-
+        //DictionaryExample();
+        //SortedSetBasics();
+        //SortedSetExample();
+        SortedSetClusterExample();
 
         // Algorithms
         //CalculateCharacterFrequency();
+        //UniqueCharacters();
+
     }
 
     // Bir ayırıcı yazdıran metod.
@@ -435,32 +439,224 @@ internal partial class Program
             Console.WriteLine(p);
         }
     }
+    private static void SortedDictionaryExample()
+    {
+        SortedDictionary<string, List<int>> bookIndex = new()
+        {
+            {"HTML", new List<int>(){8, 10, 12} },
+            {"CSS", new List<int>(){ 70, 80, 90} },
+            {"jQuery", new List<int>() {30, 40, 50 } },
+            {"SQL", new List<int>(){21, 11, 31} }
+        };
 
+        bookIndex.Add("FTP", new List<int>() { 15, 17, 19 });
 
+        foreach (var b in bookIndex)
+        {
+            Console.WriteLine(b.Key);
+            b.Value.ForEach(i => Console.WriteLine($"\t > {i}"));
+            //foreach (var index in b.Value)
+            //{
+            //    Console.WriteLine($"\t > {index}");
+            //}
+        }
+    }
+    private static void SortedSetBasics()
+    {
+        SortedSet<string> nameList = new()
+        {
+            "Ahmet",
+            "Mehmet"
+        };
+
+        //ekleme
+        nameList.Add("Şule");
+        nameList.Add("Neslihan");
+        nameList.Add("Fahrettin");
+        nameList.Add("Fatih");
+        nameList.Add("Nalan");
+
+        Console.WriteLine("Ekleme işleminden sonra liste\n");
+        foreach (var i in nameList)
+        {
+            Console.WriteLine(i);
+        }
+
+        Wrapper();
+
+        //kaldırma
+        nameList.Remove("Şule");
+        nameList.RemoveWhere(i => i.Contains("N"));
+        nameList.RemoveWhere(i => i.StartsWith("A"));
+
+        Console.WriteLine("Kaldırma işleminden sonra liste\n");
+        foreach (var i in nameList)
+        {
+            Console.WriteLine(i);
+        }
+    }
+    private static void SortedSetExample()
+    {
+        List<int> numbers = new();
+        var rand = new Random();
+
+        for (int i = 0; i < 100; i++)
+        {
+            numbers.Add(rand.Next(0, 50));
+            Console.WriteLine($"{numbers[i]} : Listeye eklendi.");
+        }
+
+        Wrapper();
+
+        SortedSet<int> uniqueNumbers = new(numbers);
+
+        Console.WriteLine("Unique sayılar;");
+        foreach (var number in uniqueNumbers)
+        {
+            Console.Write(number + " ");
+        }
+    }
+    private static void SortedSetClusterExample()
+    {
+        SortedSet<int> numbersA = new() { 1, 2, 4, 6, 7 };
+        SortedSet<int> numbersB = new() { 1, 2, 3, 5, 7 };
+
+        //yazdırma
+        Console.WriteLine("Küme A;");
+        foreach (var a in numbersA)
+        {
+            Console.Write(a);
+        }
+        Wrapper();
+        Console.WriteLine("Küme B;");
+        foreach (var b in numbersB)
+        {
+            Console.Write(b);
+        }
+
+        Wrapper();
+
+        //ortak
+        Console.WriteLine("Ortak Elemanlar");
+        //numbersA.IntersectWith(numbersB);
+        foreach (var ab in numbersA)
+        {
+            Console.Write(ab);
+        }
+
+        Wrapper();
+
+        //hariç
+        Console.WriteLine("B'de olan elemanları hariç tutma");
+        //numbersA.ExceptWith(numbersB);
+        foreach (var a in numbersA)
+        {
+            Console.Write(a);
+        }
+
+        Wrapper();
+
+        //kesişim dışındaki elemanlar
+        Console.WriteLine("Kesişim dışındaki elemanlar");
+        numbersA.SymmetricExceptWith(numbersB);
+        foreach (var item in numbersA)
+        {
+            Console.Write(item);
+        }
+        Wrapper();
+
+        //birleşim
+        Console.WriteLine("A ve B kümesinin birleşimi");
+        //numbersA.UnionWith(numbersB);
+        foreach (var ab in numbersA)
+        {
+            Console.Write(ab);
+        }
+
+        Wrapper();
+
+    }
 
     // CalculateCharacterFrequency
     private static void CalculateCharacterFrequency()
     {
         string text = "asfqWFqwfAsfQWFqwgqwGqwgASdQWgqWGasGqwGqwFqwG";
 
-        Dictionary<char, int> characters = new();
+        // Her karakterin tekrar sayısını saklamak için Dictionary oluştur
+        Dictionary<char, int> charCount = new Dictionary<char, int>();
 
-        for (int i = 0; i < text.Length; i++)
+        // Metindeki her bir karakteri kontrol et
+        foreach (char c in text)
         {
-            if (!characters.ContainsKey(text[i]))
+            if (charCount.ContainsKey(c))
             {
-                characters.Add(text[i], 1);
+                // Eğer karakter zaten Dictionary'de varsa, sayısını artır
+                charCount[c]++;
             }
             else
             {
-                characters[text[i]]++;
+                // Eğer karakter Dictionary'de yoksa, onu ekle ve sayısını 1 yap
+                charCount[c] = 1;
             }
         }
 
-
-        foreach (var character in characters)
+        // Dictionary içindeki karakterleri ve tekrar sayılarını ekrana yazdır
+        foreach (var item in charCount)
         {
-            Console.WriteLine(character);
+            Console.WriteLine($"{item.Key}: {item.Value}");
         }
+    }
+    private static void UniqueCharacters()
+    {
+        string text = "aaaabbbbbddddddaaaaawwwwwwwwwwttttttt";
+
+        SortedSet<char> chars = new(text);
+
+        foreach (char c in chars)
+        {
+            Console.WriteLine(c);
+        }
+
+        // Built-in metotlar olmadan
+        //string text = "aaaabbbbbddddddaaaaawwwwwwwwwwttttttt";
+        //List<char> uniqueChars = new List<char>();
+
+        //foreach (char c in text)
+        //{
+        //    bool found = false;
+        //    foreach (char existingChar in uniqueChars)
+        //    {
+        //        if (existingChar == c)
+        //        {
+        //            found = true;
+        //            break;
+        //        }
+        //    }
+
+        //    if (!found)
+        //    {
+        //        uniqueChars.Add(c);
+        //    }
+        //}
+
+        //// Sıralama işlemi için basit bir mantıksal sıralama algoritması kullanabiliriz
+        //for (int i = 0; i < uniqueChars.Count - 1; i++)
+        //{
+        //    for (int j = i + 1; j < uniqueChars.Count; j++)
+        //    {
+        //        if (uniqueChars[i] > uniqueChars[j])
+        //        {
+        //            char temp = uniqueChars[i];
+        //            uniqueChars[i] = uniqueChars[j];
+        //            uniqueChars[j] = temp;
+        //        }
+        //    }
+        //}
+
+        //// Sıralanmış karakterleri ekrana yazdırma
+        //foreach (char c in uniqueChars)
+        //{
+        //    Console.WriteLine(c);
+        //}
     }
 }
