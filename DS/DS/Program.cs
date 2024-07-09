@@ -22,7 +22,8 @@ internal partial class Program
         //DictionaryExample();
         //SortedSetBasics();
         //SortedSetExample();
-        SortedSetClusterExample();
+        //SortedSetClusterExample();
+        HasSetExample();
 
         // Algorithms
         //CalculateCharacterFrequency();
@@ -576,7 +577,10 @@ internal partial class Program
         Wrapper();
 
     }
+    private static void HashSet()
+    {
 
+    }
     // CalculateCharacterFrequency
     private static void CalculateCharacterFrequency()
     {
